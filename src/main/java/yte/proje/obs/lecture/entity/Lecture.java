@@ -32,17 +32,9 @@ public class Lecture extends BaseEntity {
     @JoinColumn(name = "academician_id", referencedColumnName = "ID")
     private Academician academician;
 
-    @OneToMany
-    @JoinColumn(name = "assistant_id")
-    private Set<Assistant> books = new HashSet<>();
-
-    @OneToMany
-    @JoinColumn(name = "exam_id")
-    private Set<Exam> exams = new HashSet<>();
-
-    @OneToMany
-    @JoinColumn(name = "exam_id")
-    private Set<Homework> homeworks = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "assistant_id", referencedColumnName = "ID")
+    private Assistant assistant;
 
     public Lecture(final String name, final String definition, final String type, final Long code, final LocalDateTime dateTime,
                    final Long room, final Long academicianId,final Long assistantId) {
